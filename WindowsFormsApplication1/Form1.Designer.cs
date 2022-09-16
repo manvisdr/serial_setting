@@ -36,7 +36,8 @@
             this.refreshPortBtn = new System.Windows.Forms.Button();
             this.readAllBtn = new System.Windows.Forms.Button();
             this.deviceGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.btnReadDevice = new System.Windows.Forms.Button();
+            this.txtboxIDDev = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -91,7 +92,7 @@
             // 
             this.connectBtn.Location = new System.Drawing.Point(12, 10);
             this.connectBtn.Name = "connectBtn";
-            this.connectBtn.Size = new System.Drawing.Size(75, 23);
+            this.connectBtn.Size = new System.Drawing.Size(97, 23);
             this.connectBtn.TabIndex = 1;
             this.connectBtn.Text = "Connect";
             this.connectBtn.UseVisualStyleBackColor = true;
@@ -100,14 +101,14 @@
             // portComboBox
             // 
             this.portComboBox.FormattingEnabled = true;
-            this.portComboBox.Location = new System.Drawing.Point(93, 10);
+            this.portComboBox.Location = new System.Drawing.Point(125, 10);
             this.portComboBox.Name = "portComboBox";
             this.portComboBox.Size = new System.Drawing.Size(121, 21);
             this.portComboBox.TabIndex = 2;
             // 
             // refreshPortBtn
             // 
-            this.refreshPortBtn.Location = new System.Drawing.Point(221, 10);
+            this.refreshPortBtn.Location = new System.Drawing.Point(261, 10);
             this.refreshPortBtn.Name = "refreshPortBtn";
             this.refreshPortBtn.Size = new System.Drawing.Size(24, 23);
             this.refreshPortBtn.TabIndex = 3;
@@ -116,17 +117,17 @@
             // 
             // readAllBtn
             // 
-            this.readAllBtn.Location = new System.Drawing.Point(263, 10);
+            this.readAllBtn.Location = new System.Drawing.Point(293, 10);
             this.readAllBtn.Name = "readAllBtn";
             this.readAllBtn.Size = new System.Drawing.Size(75, 23);
             this.readAllBtn.TabIndex = 4;
             this.readAllBtn.Text = "Read";
             this.readAllBtn.UseVisualStyleBackColor = true;
-            this.readAllBtn.Click += new System.EventHandler(this.readAllBtn_Click);
             // 
             // deviceGroupBox
             // 
-            this.deviceGroupBox.Controls.Add(this.textBox6);
+            this.deviceGroupBox.Controls.Add(this.btnReadDevice);
+            this.deviceGroupBox.Controls.Add(this.txtboxIDDev);
             this.deviceGroupBox.Controls.Add(this.label6);
             this.deviceGroupBox.Controls.Add(this.label5);
             this.deviceGroupBox.Controls.Add(this.label4);
@@ -137,12 +138,22 @@
             this.deviceGroupBox.TabStop = false;
             this.deviceGroupBox.Text = "Device";
             // 
-            // textBox6
+            // btnReadDevice
             // 
-            this.textBox6.Location = new System.Drawing.Point(94, 19);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 3;
+            this.btnReadDevice.Location = new System.Drawing.Point(166, 70);
+            this.btnReadDevice.Name = "btnReadDevice";
+            this.btnReadDevice.Size = new System.Drawing.Size(28, 23);
+            this.btnReadDevice.TabIndex = 4;
+            this.btnReadDevice.Text = "R";
+            this.btnReadDevice.UseVisualStyleBackColor = true;
+            this.btnReadDevice.Click += new System.EventHandler(this.btnReadDevice_Click);
+            // 
+            // txtboxIDDev
+            // 
+            this.txtboxIDDev.Location = new System.Drawing.Point(94, 19);
+            this.txtboxIDDev.Name = "txtboxIDDev";
+            this.txtboxIDDev.Size = new System.Drawing.Size(100, 20);
+            this.txtboxIDDev.TabIndex = 3;
             // 
             // label6
             // 
@@ -502,7 +513,7 @@
         private System.Windows.Forms.Button refreshPortBtn;
         private System.Windows.Forms.Button readAllBtn;
         private System.Windows.Forms.GroupBox deviceGroupBox;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtboxIDDev;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -538,6 +549,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnReadDevice;
     }
 }
 

@@ -13,21 +13,13 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        private byte flagHead = 0x3C ;
-        private byte flagTail = 0x3E ;
-        private byte regA = 0x41;
-        private byte regE = 0x45;
-        private byte regI = 0x49;
-        private byte regK = 0x4B;
-        private byte regL = 0x4C;
-        private byte regM = 0x4D;
-        private byte regR = 0x52;
-   
+        private SerialManager serialManager = new SerialManager();
+        private bool connected = false;
+        private string sketchVersion = "1.0";
+
         public Form1()
         {
             InitializeComponent();
-            
-            
         }   
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,43 +27,76 @@ namespace WindowsFormsApplication1
             connectBtn.Text = "Connect";
             string [] ports = SerialPort.GetPortNames();
             portComboBox.Items.AddRange(ports);
+            addAvailableComPorts();
+            updateUI();
+        }
+
+        private void addAvailableComPorts()
+        {
+            foreach (string comPort in serialManager.getAvailablePorts())
+                portComboBox.Items.Add(comPort);
+
+            if (portComboBox.Items.Count > 0) portComboBox.SelectedIndex = 0;
+        }
+
+
+
+        private void updateUI()
+        {
+            if (connected)
+            {
+                connectBtn.Text = "DISCONNECT";
+
+                //btGet.Enabled = true;
+                //btSetSystem.Enabled = true;
+                //btSetCustom.Enabled = true;
+                //dtpCustom.Enabled = true;
+                portComboBox.Enabled = false;
+            }
+            else
+            {
+                connectBtn.Text = "CONNECT";
+                //toolStripStatusLabel1.Text = "Disconnected";
+                //btGet.Enabled = false;
+                //btSetSystem.Enabled = false;
+                //btSetCustom.Enabled = false;
+                //dtpCustom.Enabled = false;
+                portComboBox.Enabled = true;
+            }
         }
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
+            if (!connected)
             {
-                serialPort1.Close();
-                connectBtn.Text = "Connect";
+                string serialPortName = (string)portComboBox.SelectedItem;
+                bool result = serialManager.connect(serialPortName);
+
+                //if (result)
+                //{
+                //    result = serialManager.handshake();
+                //}
+                //else return;
+
+                if (result)
+                {
+                    connected = true;
+                    updateUI();
+                }
+                else serialManager.disconnect();
             }
+
             else
             {
-                try
-                {
-                    serialPort1.PortName = portComboBox.Text;
-                    serialPort1.BaudRate = 9600;
-                    serialPort1.DataBits = 8;
-                    serialPort1.StopBits = StopBits.One;
-                    serialPort1.Parity = Parity.None;
-                    serialPort1.Open();
-                    connectBtn.Text = "Disconnect";
-                }
-                catch (Exception err)
-                {
-                    connectBtn.Text = "Connect";
-                    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                serialManager.disconnect();
+                connected = false;
+                updateUI();
             }
-            
         }
 
-        private void readAllBtn_Click(object sender, EventArgs e)
+        private void btnReadDevice_Click(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
-            {
-                byte[] buffData = { flagHead, regA,flagTail };
-                serialPort1.Write(buffData, 0, buffData.Length);
-            }
+            txtboxIDDev.Text = serialManager.getIDDevice();
         }
     }
 }
