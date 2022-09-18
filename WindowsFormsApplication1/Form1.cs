@@ -14,6 +14,8 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         private SerialManager serialManager = new SerialManager();
+        SByte indexA, indexB, indexC;
+        string dataA, dataB, dataC;
         private bool connected = false;
         private string sketchVersion = "1.0";
 
@@ -39,7 +41,19 @@ namespace WindowsFormsApplication1
             if (portComboBox.Items.Count > 0) portComboBox.SelectedIndex = 0;
         }
 
+        private void btnEthSend_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtbIP.Text))
+            {
+                MessageBox.Show("The TextBox is empty!");
+               
+            }
+            else
+            {
+                serialManager.sendData(txtbIP.Text + "55");
 
+            }
+        }
 
         private void updateUI()
         {
@@ -72,12 +86,6 @@ namespace WindowsFormsApplication1
                 string serialPortName = (string)portComboBox.SelectedItem;
                 bool result = serialManager.connect(serialPortName);
 
-                //if (result)
-                //{
-                //    result = serialManager.handshake();
-                //}
-                //else return;
-
                 if (result)
                 {
                     connected = true;
@@ -97,6 +105,24 @@ namespace WindowsFormsApplication1
         private void btnReadDevice_Click(object sender, EventArgs e)
         {
             txtboxIDDev.Text = serialManager.getIDDevice();
+        }
+
+        private void btReadAll_Click(object sender, EventArgs e)
+        {
+            string response;
+            response = serialManager.getAllData();
+
+            indexA = Convert.ToSByte(response.IndexOf("A"));
+            indexB = Convert.ToSByte(response.IndexOf("B"));
+            indexC = Convert.ToSByte(response.IndexOf("C"));
+
+            dataA = response.Substring(indexA + 1, (indexB - indexA) - 1);
+            dataB = response.Substring(indexB + 1, (indexC - indexB) - 1);
+            dataC = response.Substring(indexC + 1, (response.Length-indexC)-1);
+
+            txtbIP.Text = dataA;
+            txtbNetMask.Text = dataB;
+            txtbGateway.Text = dataC;
         }
     }
 }

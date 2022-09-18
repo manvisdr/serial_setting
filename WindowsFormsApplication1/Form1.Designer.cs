@@ -34,7 +34,7 @@
             this.connectBtn = new System.Windows.Forms.Button();
             this.portComboBox = new System.Windows.Forms.ComboBox();
             this.refreshPortBtn = new System.Windows.Forms.Button();
-            this.readAllBtn = new System.Windows.Forms.Button();
+            this.btReadAll = new System.Windows.Forms.Button();
             this.deviceGroupBox = new System.Windows.Forms.GroupBox();
             this.btnReadDevice = new System.Windows.Forms.Button();
             this.txtboxIDDev = new System.Windows.Forms.TextBox();
@@ -51,14 +51,16 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.ethernetGroupBox = new System.Windows.Forms.GroupBox();
+            this.btnEthRecv = new System.Windows.Forms.Button();
+            this.btnEthSend = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.txtbDns = new System.Windows.Forms.TextBox();
+            this.txtbGateway = new System.Windows.Forms.TextBox();
+            this.txtbNetMask = new System.Windows.Forms.TextBox();
+            this.txtbIP = new System.Windows.Forms.TextBox();
             this.loraGroupBox = new System.Windows.Forms.GroupBox();
             this.appSKeyLabel = new System.Windows.Forms.Label();
             this.nwkSKeyLabel = new System.Windows.Forms.Label();
@@ -73,6 +75,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnWriteAll = new System.Windows.Forms.Button();
             this.deviceGroupBox.SuspendLayout();
             this.mqttGroupBox.SuspendLayout();
             this.ethernetGroupBox.SuspendLayout();
@@ -82,7 +85,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 328);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 353);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(684, 22);
             this.statusStrip1.TabIndex = 0;
@@ -115,14 +118,15 @@
             this.refreshPortBtn.Text = "R";
             this.refreshPortBtn.UseVisualStyleBackColor = true;
             // 
-            // readAllBtn
+            // btReadAll
             // 
-            this.readAllBtn.Location = new System.Drawing.Point(293, 10);
-            this.readAllBtn.Name = "readAllBtn";
-            this.readAllBtn.Size = new System.Drawing.Size(75, 23);
-            this.readAllBtn.TabIndex = 4;
-            this.readAllBtn.Text = "Read";
-            this.readAllBtn.UseVisualStyleBackColor = true;
+            this.btReadAll.Location = new System.Drawing.Point(293, 10);
+            this.btReadAll.Name = "btReadAll";
+            this.btReadAll.Size = new System.Drawing.Size(75, 23);
+            this.btReadAll.TabIndex = 4;
+            this.btReadAll.Text = "Read All";
+            this.btReadAll.UseVisualStyleBackColor = true;
+            this.btReadAll.Click += new System.EventHandler(this.btReadAll_Click);
             // 
             // deviceGroupBox
             // 
@@ -265,20 +269,43 @@
             // 
             // ethernetGroupBox
             // 
+            this.ethernetGroupBox.Controls.Add(this.btnEthRecv);
+            this.ethernetGroupBox.Controls.Add(this.btnEthSend);
             this.ethernetGroupBox.Controls.Add(this.label10);
             this.ethernetGroupBox.Controls.Add(this.label9);
             this.ethernetGroupBox.Controls.Add(this.label8);
             this.ethernetGroupBox.Controls.Add(this.label7);
-            this.ethernetGroupBox.Controls.Add(this.textBox13);
-            this.ethernetGroupBox.Controls.Add(this.textBox12);
-            this.ethernetGroupBox.Controls.Add(this.textBox11);
-            this.ethernetGroupBox.Controls.Add(this.textBox10);
+            this.ethernetGroupBox.Controls.Add(this.txtbDns);
+            this.ethernetGroupBox.Controls.Add(this.txtbGateway);
+            this.ethernetGroupBox.Controls.Add(this.txtbNetMask);
+            this.ethernetGroupBox.Controls.Add(this.txtbIP);
             this.ethernetGroupBox.Location = new System.Drawing.Point(445, 177);
             this.ethernetGroupBox.Name = "ethernetGroupBox";
-            this.ethernetGroupBox.Size = new System.Drawing.Size(200, 124);
+            this.ethernetGroupBox.Size = new System.Drawing.Size(200, 158);
             this.ethernetGroupBox.TabIndex = 7;
             this.ethernetGroupBox.TabStop = false;
             this.ethernetGroupBox.Text = "Ethernet";
+            // 
+            // btnEthRecv
+            // 
+            this.btnEthRecv.Font = new System.Drawing.Font("Marlett", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.btnEthRecv.Location = new System.Drawing.Point(132, 123);
+            this.btnEthRecv.Name = "btnEthRecv";
+            this.btnEthRecv.Size = new System.Drawing.Size(25, 25);
+            this.btnEthRecv.TabIndex = 9;
+            this.btnEthRecv.Text = "R";
+            this.btnEthRecv.UseVisualStyleBackColor = true;
+            // 
+            // btnEthSend
+            // 
+            this.btnEthSend.Font = new System.Drawing.Font("Marlett", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.btnEthSend.Location = new System.Drawing.Point(163, 123);
+            this.btnEthSend.Name = "btnEthSend";
+            this.btnEthSend.Size = new System.Drawing.Size(25, 25);
+            this.btnEthSend.TabIndex = 8;
+            this.btnEthSend.Text = "W";
+            this.btnEthSend.UseVisualStyleBackColor = true;
+            this.btnEthSend.Click += new System.EventHandler(this.btnEthSend_Click);
             // 
             // label10
             // 
@@ -316,33 +343,33 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "IP Address";
             // 
-            // textBox13
+            // txtbDns
             // 
-            this.textBox13.Location = new System.Drawing.Point(94, 97);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 20);
-            this.textBox13.TabIndex = 3;
+            this.txtbDns.Location = new System.Drawing.Point(94, 97);
+            this.txtbDns.Name = "txtbDns";
+            this.txtbDns.Size = new System.Drawing.Size(100, 20);
+            this.txtbDns.TabIndex = 3;
             // 
-            // textBox12
+            // txtbGateway
             // 
-            this.textBox12.Location = new System.Drawing.Point(94, 70);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 2;
+            this.txtbGateway.Location = new System.Drawing.Point(94, 70);
+            this.txtbGateway.Name = "txtbGateway";
+            this.txtbGateway.Size = new System.Drawing.Size(100, 20);
+            this.txtbGateway.TabIndex = 2;
             // 
-            // textBox11
+            // txtbNetMask
             // 
-            this.textBox11.Location = new System.Drawing.Point(94, 44);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 20);
-            this.textBox11.TabIndex = 1;
+            this.txtbNetMask.Location = new System.Drawing.Point(94, 44);
+            this.txtbNetMask.Name = "txtbNetMask";
+            this.txtbNetMask.Size = new System.Drawing.Size(100, 20);
+            this.txtbNetMask.TabIndex = 1;
             // 
-            // textBox10
+            // txtbIP
             // 
-            this.textBox10.Location = new System.Drawing.Point(94, 19);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 0;
+            this.txtbIP.Location = new System.Drawing.Point(94, 19);
+            this.txtbIP.Name = "txtbIP";
+            this.txtbIP.Size = new System.Drawing.Size(100, 20);
+            this.txtbIP.TabIndex = 0;
             // 
             // loraGroupBox
             // 
@@ -471,17 +498,27 @@
             this.comboBox2.Size = new System.Drawing.Size(100, 21);
             this.comboBox2.TabIndex = 0;
             // 
+            // btnWriteAll
+            // 
+            this.btnWriteAll.Location = new System.Drawing.Point(374, 10);
+            this.btnWriteAll.Name = "btnWriteAll";
+            this.btnWriteAll.Size = new System.Drawing.Size(75, 23);
+            this.btnWriteAll.TabIndex = 10;
+            this.btnWriteAll.Text = "Write All";
+            this.btnWriteAll.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 350);
+            this.ClientSize = new System.Drawing.Size(684, 375);
+            this.Controls.Add(this.btnWriteAll);
             this.Controls.Add(this.meterGroupBox);
             this.Controls.Add(this.loraGroupBox);
             this.Controls.Add(this.ethernetGroupBox);
             this.Controls.Add(this.mqttGroupBox);
             this.Controls.Add(this.deviceGroupBox);
-            this.Controls.Add(this.readAllBtn);
+            this.Controls.Add(this.btReadAll);
             this.Controls.Add(this.refreshPortBtn);
             this.Controls.Add(this.portComboBox);
             this.Controls.Add(this.connectBtn);
@@ -511,7 +548,7 @@
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.ComboBox portComboBox;
         private System.Windows.Forms.Button refreshPortBtn;
-        private System.Windows.Forms.Button readAllBtn;
+        private System.Windows.Forms.Button btReadAll;
         private System.Windows.Forms.GroupBox deviceGroupBox;
         private System.Windows.Forms.TextBox txtboxIDDev;
         private System.Windows.Forms.Label label6;
@@ -531,10 +568,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox txtbDns;
+        private System.Windows.Forms.TextBox txtbGateway;
+        private System.Windows.Forms.TextBox txtbNetMask;
+        private System.Windows.Forms.TextBox txtbIP;
         private System.Windows.Forms.GroupBox loraGroupBox;
         private System.Windows.Forms.Label appSKeyLabel;
         private System.Windows.Forms.Label nwkSKeyLabel;
@@ -550,6 +587,9 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button btnReadDevice;
+        private System.Windows.Forms.Button btnEthSend;
+        private System.Windows.Forms.Button btnEthRecv;
+        private System.Windows.Forms.Button btnWriteAll;
     }
 }
 

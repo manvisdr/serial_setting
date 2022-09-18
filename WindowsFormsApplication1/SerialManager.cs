@@ -12,6 +12,17 @@ namespace WindowsFormsApplication1
     class SerialManager
     {
         private SerialPort serialPort;
+        //SByte indexA, indexB, indexC;
+        //string dataA, dataB, dataC;
+        private byte flagHead = 0x3C;
+        private byte flagTail = 0x3E;
+        private byte regA = 0x41;
+        private byte regE = 0x45;
+        private byte regI = 0x49;
+        private byte regK = 0x4B;
+        private byte regL = 0x4C;
+        private byte regM = 0x4D;
+        private byte regR = 0x52;
 
         public string[] getAvailablePorts()
         {
@@ -61,9 +72,10 @@ namespace WindowsFormsApplication1
         // Get the version of the running sketch
         // command: ?V
         // response: <version> (for example "1.0")
-        public string getSketchVersion()
+        public string getAllData()
         {
-            serialPort.WriteLine("?V");
+            serialPort.WriteLine("<A>");
+            
 
             string response = "";
             try
@@ -78,13 +90,17 @@ namespace WindowsFormsApplication1
             return response;
         }
 
+        public void sendData(String strBuff)
+        {
+            serialPort.Write(strBuff);
+        }
+
         // Get the actual RTC date and time 
         // command: ?T
         // response: date and time in the form dd/MM/yyyy hh:mm:ss
         public string getIDDevice()
         {
             serialPort.WriteLine("<I>");
-
             string response = "";
             try
             {
